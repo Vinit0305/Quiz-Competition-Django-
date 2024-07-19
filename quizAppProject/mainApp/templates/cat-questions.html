@@ -1,0 +1,165 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{category.title}} Questions{% endblock %}
+{% block content%}
+    <style>
+
+    .my-4{
+        color: white;
+    }
+    body{
+        min-height: 100vh;
+        background: linear-gradient(#141e30, #243b55);
+    }
+
+
+        .card {
+            border: none;
+            border-radius: 10px 10px 10px 10px;
+            box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.4);
+            /* transition: box-shadow 0.3s ease; */
+        }
+
+        .card:hover {
+            /* box-shadow: 0px 4px 2000px rgb(0, 0, 0); */
+        }
+
+        .card-header {
+            background-color: #271f4b;
+            color: #ffffff;
+            border-radius: 10px 10px 10px 10px;
+        }
+
+        .card-body {
+            background-color: #f7f7f7;
+        }
+
+        .table-bordered {
+            border: 1px solid #cccccc;
+        }
+
+        .table-bordered th {
+            background-color: #2c3e50;
+            color: #ffffff;
+        }
+
+        .table-bordered td, .table-bordered th {
+            padding: 8px;
+            text-align: center;
+        }
+
+        .tablenew td{
+            width: 100px;
+        }
+
+        .btn-primary {
+            background-color: #2d2358;
+            border-color: #2d2358;
+            color: #ffffff;
+            font-size: 20px;
+            padding: 12px 24px;
+            width: 200px;
+        }
+
+        .btn-primary:hover {
+            background-color: #148f77;
+            border-color: #148f77;
+        }
+
+        .btn-warning {
+            background-color: #a08cd6;
+            border-color: #a08cd6;
+            color: #ffffff;
+            font-size: 20px;
+            padding: 12px 24px;
+            width: 200px;
+        }
+
+        .btn-warning:hover {
+            background-color: #148f77;
+            border-color: #148f77;
+        }
+
+        .option-input {
+            width: 15px;
+            height: 15px;
+            margin-right: 0px;
+        }
+
+        .option-label {
+            font-size: 20px;
+        }
+
+        
+        
+        .question-tab:hover {
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+        }
+        
+    </style>
+
+    <h1 class="my-4 question-tab">{{category.title}} Questions</h1>
+
+    <div class="dim-overlay"></div>
+
+    <div class="card my-4">
+        <h3 class="card-header">{{question.question}} <span class="timer float-end"></span></h1>
+        <form method="post" action="{% url 'submit_answer' category.id question.id %}">
+            {% csrf_token %}
+            <div class="card-body">
+                <table class="tablenew table table-bordered">
+                    <tr>
+                        <td><input value="{{question.option1}}" id="option_1" name="answer" type="radio" class="option-input" /></td>
+                        <th> <label for="option_1" class="option-label">{{question.option1}} </label> </th>
+                    </tr>
+                    <tr>
+                        <td><input value="{{question.option2}}" id="option_2" name="answer" type="radio" class="option-input" /></td>
+                        <th> <label for="option_2" class="option-label">{{question.option2}} </label> </th>
+                    </tr>
+                    <tr>
+                        <td><input value="{{question.option3}}" id="option_3" name="answer" type="radio" class="option-input" /></td>
+                        <th> <label for="option_3" class="option-label">{{question.option3}} </label> </th>
+                    </tr>
+                    <tr>
+                        <td><input value="{{question.option4}}" id="option_4" name="answer" type="radio" class="option-input" /></td>
+                        <th> <label for="option_4" class="option-label">{{question.option4}} </label> </th>
+                    </tr>
+                </table>
+            </div>
+            <div class="card-footer">
+                <input type="submit" name="submit" value="Submit" class="btn btn-primary sub" />
+                <input type="submit" name="skip" value="Skip" class="btn btn-warning  skip" />
+
+            </div>
+        </form>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{% static 'jQuery-countdownTimer-master/dist/js/jQuery.countdownTimer.min.js' %}"></script>
+    <script>
+        $(document).ready(function(){
+            $(".question-tab").hover(
+                function() {
+                    $(".dim-overlay").addClass('active');
+                },
+                function() {
+                    $(".dim-overlay").removeClass('active');
+                }
+            );
+
+            $(".sub").on('click', function(){
+                var _checkAns=$("input[name='answer']:checked").val()
+                if (_checkAns==undefined){
+                    alert('Please select an option');
+                    return false;
+                }
+            });
+
+
+            
+        });
+
+    </script>
+{% endblock %}

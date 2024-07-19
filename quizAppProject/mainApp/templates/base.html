@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../static/navstyle.css">
+    <title>{% block title %}{{title}}{% endblock %}</title>
+    {% block style %}{% endblock %}
+    <style>
+      /* Change background color */
+.navbar-custom {
+  background-color: #ffffff;
+  
+}
+
+/* Change text color */
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-nav .nav-link {
+  color: #000000;
+}
+
+.navbar-custom .navbar-nav .nav-link:hover {
+  background-color: #bcadf3;
+}
+
+.navbar-custom .navbar-nav .nav-link.active {
+  background-color: #9da3f5;
+}
+
+/* Change active link text color */
+.navbar-custom .navbar-nav .nav-link.active {
+  color: #000000;
+}
+
+.navbar-custom {
+  height: 80px;
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-nav .nav-link {
+  font-size: 22px;
+}
+
+/* Add a box shadow */
+.navbar-custom {
+  box-shadow: 0 2px 4px rgba(133, 135, 243, 0.1);
+}
+
+@keyframes openTitle {
+  0% {
+    opacity: 0;
+    transform: translateY(0px);
+    transform: translateX(200px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+/* Remove borders from table */
+/* Remove borders from table */
+.table-custom {
+  border: 1px solid black;
+    font-family: 'Montserrat';
+    background-color: rgb(128, 128, 128, 0.5);
+    color: #ffffff;
+
+}
+
+/* Add background color to table rows on hover */
+
+
+/* Add alternating background color to table rows */
+/* .table-custom tbody tr:nth-of-type(even) {
+  background-color: #f9f9f9;
+} */
+
+/* Add padding to table cells */
+.table-custom td, .table-custom th {
+  padding: 30px;
+}
+
+/* Add box shadow to table */
+.table-custom {
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+}
+
+/* Style table header */
+.table-custom thead {
+  background-color: #322353;
+  color: #ffffff;
+}
+
+/* Style table header text */
+.table-custom thead th {
+  font-weight: bold;
+  padding: 12px;
+}
+
+/* Style table body text */
+.table-custom tbody td {
+  font-size: 14px;
+}
+
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light navbar-custom" style="font-family: 'Montserrat'">
+        <div class="container">
+          <img style="height: 50px; position:absolute; margin-left: -6rem;"  src="../static/images/icon.png" alt="">
+          <a class="navbar-brand" style="margin-left: -2.5rem; font-weight: 600;" href="#">Quizzify</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="float: right;">
+              <li class="nav-item" style="margin-left: 3rem;" >
+                <a class="nav-link " aria-current="page" href="/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'register' %}">Register</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'all_categories' %}">Categories</a>
+              </li> 
+              <li class="nav-item" style="margin-left:40vw;">
+                {% if user.is_authenticated %}
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                {% endif %}
+              </li>
+              
+            </ul>
+            
+          </div>
+        </div>
+      </nav>
+      <!-- <nav>
+        <div class="logo">
+            
+            <img src="../static/images/icon.png" alt="Quizzy Logo"> 
+            <div class="title" style="align-items: center;"><h1>Quizzy</h1></div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="{% url 'register' %}">Register</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'all_categories' %}">Categories</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav> -->
+
+
+      
+      <main class="container">
+        {% block content%}
+        {% endblock %}
+      </main>
+      <footer></footer>
+
+      {% block script %}
+      {% endblock %}
+</body>
+</html>

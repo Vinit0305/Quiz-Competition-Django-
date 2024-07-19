@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{category.title}} Questions{% endblock %}
+{% block style %}
+<style>
+    body{
+        color: white;
+        min-height: 100vh;
+        background: linear-gradient(#141e30, #243b55);
+        z-index: -1;
+    }
+
+</style>
+{% endblock %}
+{% block content%}
+<center>
+    <h1 class="my-4">Result</h1>
+
+<table class="table table-custom">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Question</th>
+            <th>Submitted Answer</th>
+            <th>Right Answer</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in result %}
+        <tr>
+            <td>{{row.id}}</td>
+            <td>{{row.question.question}}</td>
+            <td>{{row.right_choice}}</td>
+            {% if row.right_choice == row.question.right_option  %}
+            <td class="bg-success text-white">{{row.question.right_option}}</td>
+            {% elif row.right_choice == 'Question Skipped' %}
+            <td class="bg-warning">{{row.question.right_option}}</td>
+            {% else %}
+            <td class="bg-danger ">{{row.question.right_option}}</td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+<table class="table table-custom">
+    <h1 class="my-4">Details</h1>
+    <tr>
+        <th>Total Skipped Question</th>
+        <td>{{total_skipped}}</td>
+    </tr>
+    <tr>
+        <th>Total Attempted Question</th>
+        <td>{{total_attempted}}</td>
+    </tr>
+    <tr>
+        <th>Total Right Answers</th>
+        <td>{{rightAnswer_count}}</td>
+    </tr>
+    <tr>
+        <th>Percentage</th>
+        <td>{{percentage}}</td>
+    </tr>
+</table>
+</center>
+   
+{% endblock %}

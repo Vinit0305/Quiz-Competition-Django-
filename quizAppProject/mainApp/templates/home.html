@@ -1,0 +1,187 @@
+{% extends 'base.html' %}
+
+{% block title %}Home Page{% endblock %}
+
+{% block style %}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Anybody&family=Merriweather&display=swap');
+    @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+#title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 48px;
+  font-weight: bold;
+  opacity: 0;
+  animation: openTitle 1s forwards;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+#title::after {
+  content: '';
+  display: inline-block;
+  vertical-align: bottom;
+  width: 0;
+  height: 1.1em;
+  border-right: .15em solid orange; /* Typewriter cursor effect */
+  animation: blinkCursor 0.7s infinite;
+}
+
+@keyframes openTitle {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes blinkCursor {
+  from, to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: orange;
+  }
+}
+
+
+.home-bg{
+    float: right;
+    margin-top: -350px;
+    margin-right: -50px;
+}
+
+#title{
+    padding: 2rem;
+    margin-left: -100px;
+    margin-top: 100px;
+}
+
+
+/* button */
+.button {
+    color: black;
+	display: block;
+  width: 220px;
+  max-width: 100%;
+  margin-left: -50px;
+  margin-top: 50px;
+  overflow: hidden;
+  position: relative;
+  transform: translatez(0);
+  text-decoration: none;
+  box-sizing: border-box;
+  font-size: 24px;
+	font-weight: normal;
+	box-shadow: 0 9px 18px rgba(0,0,0,0.2);
+}
+
+.instagram {
+	text-align: center;
+	border-radius: 50px;
+    font-weight: 900;
+    font-family: 'Montserrat';
+  padding: 26px;
+  color: rgb(0, 0, 0);
+  background: #eed256;
+  transition: all 0.2s ease-out 0s;
+}
+
+.gradient {
+	display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  bottom: auto;
+  margin: auto;
+  z-index: -1;
+  background: radial-gradient(90px circle at top center, rgba(235, 232, 58, 0.8) 30%, rgba(255,255,255,0));
+  transition: all 0s ease-out 0s;
+	transform: translatex(-140px);
+	animation: 18s linear 0s infinite move;
+}
+
+@keyframes move {
+	0% {
+		transform: translatex(-140px);
+	}
+	25% {
+		transform: translatex(140px);
+		opacity: 0.3;
+	}
+	50% {
+		transform: translatex(140px);
+		opacity: 1;
+		background: radial-gradient(90px circle at bottom center, rgba(235, 232, 58, 0.5) 30%, rgba(255,255,255,0));
+	}
+	75% {
+		transform: translatex(-140px);
+		opacity: 0.3;
+	}
+	100% {
+		opacity: 1;
+		transform: translatex(-140px);
+		background: radial-gradient(90px circle at top center, rgba(238,88,63,.5) 30%, rgba(255,255,255,0));
+	}
+}
+
+
+</style>
+{% endblock %}
+{% block content%}
+    
+
+
+
+    <div>
+
+        
+        <h1 id="title"  style="margin-bottom: -50px; position: relative; justify-content: center; z-index: 1; font-family: 'Abril Fatface', cursive; font-size: 48px; font-weight: bold;   animation: openTitle 1s forwards; white-space: nowrap;
+        overflow: hidden;">It's Quiz Time!!</h1>
+        <a href="{% url 'all_categories' %}" class="button instagram"><span class="gradient"></span>Take Quiz</a>
+        <img class="home-bg" style="height: 90vh; position: relative; z-index: -1;" src="../static/images/19333426.jpg" alt="">
+        
+        </div>
+        </a>
+    </div>
+   
+{% endblock %}
+
+{% block script %}
+<script>
+window.addEventListener('DOMContentLoaded', function() {
+  var title = document.getElementById('title');
+  var text = title.innerText;
+  title.innerText = '';
+  title.classList.add('animated');
+  var i = 0;
+
+  function typeWriter() {
+    if (i < text.length) {
+      if (text[i] === ' ') {
+        title.innerHTML += '&nbsp;'; // Add non-breaking space for spaces
+      } else {
+        title.innerText += text.charAt(i);
+      }
+      i++;
+      setTimeout(typeWriter, 50); // Faster typewriter speed
+    }
+  }
+
+  typeWriter();
+
+  // Remove the 'animated' class after the animation completes
+  title.addEventListener('animationend', function() {
+    title.classList.remove('animated');
+  });
+});
+
+</script>
+  
+{% endblock %}
+

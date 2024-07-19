@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+
+{% block title %}Login Page{% endblock %}
+
+{% block style %}
+<style>
+    .my-4 {
+        color: white;
+    }
+    
+    body {
+        min-height: 100vh;
+        background: linear-gradient(#141e30, #243b55);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .navbar {
+        background-color: #2c3e50;
+        color: white;
+        padding: 1rem;
+        width: 100%;
+    }
+    
+    .navbar a {
+        color: white;
+        text-decoration: none;
+        margin-right: 1rem;
+    }
+    
+    .login-container {
+        max-width: 420px;
+        padding: 2rem;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
+    }
+    
+    .login-form {
+        margin-top: 2rem;
+    }
+    
+    .login-form label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+        color: #333333;
+    }
+    
+    .login-form input[type="text"],
+    .login-form input[type="password"] {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #cccccc;
+        border-radius: 5px;
+        margin-bottom: 1rem;
+    }
+    
+    .login-form input[type="submit"] {
+        display: block;
+        width: 100%;
+        padding: 0.75rem;
+        background-color: #1abc9c;
+        border: none;
+        border-radius: 5px;
+        color: #ffffff;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    
+    .login-form input[type="submit"]:hover {
+        background-color: #291a5c;
+    }
+    
+    .register-link {
+        display: block;
+        margin-top: 1rem;
+        text-align: center;
+        color: rgb(0, 0, 0);
+    }
+    
+    .register-button {
+        padding: 0.75rem 1.5rem;
+        background-color: #ffffff;
+        color: #000000;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    
+    .register-button:hover {
+        background-color: #181c4e;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <div class="navbar">
+        <!-- Add your navigation bar content here -->
+    </div>
+    <div>
+        <center>
+            <h1 class="my-4">Login</h1>
+            <div class="login-container">
+                <form class="login-form" method="post" action="">
+                    {% csrf_token %}
+                    {{form.as_table}}
+                    <input type="submit" value="Login" />
+                </form>
+            </div>
+            <div class="register-link">
+                <span style="color: rgb(255, 255, 255);">Don't have an account?</span>
+                <a class="register-button" href="{% url 'register' %}">Register</a>
+            </div>
+        </center>
+    </div>
+{% endblock %}
